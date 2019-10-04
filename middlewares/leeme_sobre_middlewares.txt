@@ -1,0 +1,1 @@
+Sirve para proteger metodos con tokens. Es un metodo que se va a ejecutar antes que se realice la accion de lcontrolador, en una peticion http lo primero que se v aa ejecutar es esto y luego pasa a la ruta y a la accion definitiva.
