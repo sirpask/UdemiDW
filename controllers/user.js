@@ -3,10 +3,52 @@ var bcrypt = require('bcrypt-nodejs'); // para guardar la contraseña ya cifrada
 var User = require('../models/user');
 var jwt = require('../services/jwt');
 
+//para trabajar con el sistema de ficheros del sistema: fs file systema:
+var fs = require('fs');
+var path = require('path');
+
 function pruebas (req, res){
-      res.status(200).send({
-          message: 'Probando una accion del controlador de usuarios del api rest con Node Y mongo'
-      });
+
+    //var userId = req.params.id;
+
+    console.log(req.method);
+    console.log(req.url);
+    console.log(req.body);
+    console.log(req.referrer);
+    console.log(req.referrerPolicy);
+    console.log(req.context);
+    console.log(req.mode);
+    console.log(req.credentials);
+    console.log(req.redirect);
+    console.log(req.integrity);
+    console.log(req.cache);
+    console.log(req.bodyUsed);
+    console.log(req.user);
+    console.log(req.user.sub);
+
+    var urlGet = req.url;
+    var urlGetT = urlGet.split('/');
+    console.log(urlGetT);
+    var urlId = urlGetT[2];
+    console.log(urlId);
+
+    if (urlId == req.user.sub) {
+        User.findById(urlId, function(error, user) {
+        res.send (user);
+    });
+
+    }else{
+        res.status(404).send({message: 'El usuario no existe'});
+    }
+
+//      res.status(200).send({
+//          UserId});
+//    User.findById({userId}, (err, user) => {
+    //      console.log(userId);
+    //      console.log(User);
+    //     console.log(user);
+    //          res.send (User);
+    //  });
 }
 
 function saveUser(req, res){
@@ -122,6 +164,21 @@ function uploadImage(req, res){
         //para sacar la extension de la imagen:
         var ext_split = file_name.split('.');
         var file_ext = ext_split[1];
+        console.log(file_ext);
+        console.log(userId);
+
+        if (file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif') {
+            User.findByIdAndUpdate(userId, {image: file_name}, (err, userUpdated) => {
+                if(!userUpdated){
+                    res.status(404).send({message: 'No se ha podido actualizar el usuario'});
+                }else{
+                    res.status(200).send({user: userUpdated});
+                }
+
+        });
+        }else{
+            res.status(200).send({message: 'extension del archivo no valida...'});
+        }
 
         console.log(file_ext);
     }else {
@@ -130,13 +187,32 @@ function uploadImage(req, res){
 
 }
 
+function getImageFile(req, res) {    ((((vamos por aki, falla el path: Error: ENOENT: no such file or directory, stat '/home/sirpask/github/UdemiDW/path_file'))))
+    var imageFile = req.params.imageFile;
+    var path_file = './uploads/users/'+imageFile;
+
+    fs.exists(path_file, function(exists){
+        if(exists){
+            res.sendFile(path.resolve('path_file'));
+
+        }else{
+            res.status(200).send({message: 'No existe la imagen...'});
+    }
+
+});
+
+}
+
+
+
 //exportar metodos para uso de la base de datos
 module.exports = {
     pruebas,
     saveUser,
     loginUser,
     updateUser,
-    uploadImage
+    uploadImage,
+    getImageFile
 
 };
 
