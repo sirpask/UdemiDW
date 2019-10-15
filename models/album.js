@@ -9,7 +9,7 @@ var AlbumSchema = Schema({
     description: String,
     year: Number,
     image: String,
-    Artist: {type: Schema.ObjetId, ref: 'Artist'}
+    artist: {type: Schema.Types.ObjectId, ref: 'Artist'}
 });
 
 //nombre de la entidad + esquema > ojo pluraliza el User en Users para guardar colecciones
