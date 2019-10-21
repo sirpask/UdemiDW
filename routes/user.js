@@ -25,4 +25,4 @@ api.get('/get-image-user/:imageFile', UserController.getImageFile);
 
 module.exports = api;
 
-//ahora lo cargarameos en el fichero app.js
+//ahora lo cargarameos en el fichero app.jsty

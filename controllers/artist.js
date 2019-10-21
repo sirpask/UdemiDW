@@ -179,6 +179,22 @@ var file_name = 'No subido ...';
 
 }
 
+function getImageFile(req, res) {   // ((((vamos por aki, falla el path: Error: ENOENT: no such file or directory, stat '/home/sirpask/github/UdemiDW/path_file'))))
+    var imageFile = req.params.imageFile;
+    var path_file = './uploads/artists/'+imageFile;
+
+    fs.exists(path_file, function(exists){
+        if(exists){
+            res.sendFile(path.resolve(path_file));
+
+        }else{
+            res.status(200).send({message: 'No existe la imagen?...'});
+    }
+
+});
+
+}
+
 
 
 module.exports = {
@@ -187,5 +203,6 @@ module.exports = {
     getArtists,
     updateArtist,
     deleteArtist,
-    uploadImage
+    uploadImage,
+    getImageFile
 };

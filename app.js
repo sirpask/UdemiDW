@@ -8,6 +8,7 @@ var app = express();
 //cargar rutas
 var user_routes = require('./routes/user');
 var artist_routes = require('./routes/artist');
+var artist_routes = require('./routes/album');
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -17,7 +18,7 @@ app.use(bodyParser.json());
 //rutas base bodyParser
     //esto es una direccion de la url para que aglutine a todas las peticiones de la api (hay que poner siempre:)
     //http://localhost:3977/api/probando-controlador  (me refiero a ese /api)
-    
+
 app.use('/api', user_routes);
 app.use('/api', artist_routes);
 
