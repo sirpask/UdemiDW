@@ -17,6 +17,7 @@ function getArtist(req, res){
     //recoger el parametro de la url:
     var artistId = req.params.id;
 
+
     Artist.findById(artistId, (err, artist) => {
         if (err){
             res.status(500).send({message: 'Error en la peticion.'});
