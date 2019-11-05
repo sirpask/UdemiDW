@@ -77,7 +77,7 @@ function getAlbums(req, res){
     console.log(artistId);
     if(!artistId){
         //sacar todos los albums de la base de datos
-        var find = Album.find({}).sort('titulo');
+        var find = Album.find({}).sort('tittle');
     }else{
         //sacar los albus de un artista concreto de la bbdd
         var find = Album.find({artist: artistId}).sort('year');
@@ -149,7 +149,7 @@ var file_name = 'No subido ...';
 //¿hay ficheros en la peticion?
 
     if(req.files){
-        var file_path = req.files.image.path; 
+        var file_path = req.files.image.path;
     //para recortar solo el nombre del fichero y no un churro
         var file_split = file_path.split('/')
         var file_name = file_split[2];
