@@ -1,3 +1,9 @@
-<h1>
-    {{title}}
-</h1>
+<div *ngIf="identity"   class="navigation col-lg-1">
+    <h1>
+        {{title}}
+    </h1>
+</div>
+
+<div *ngIf="identity" class="central col-lg-11">
+    <p>Estas logeado en la aplicación</p>
+</div>
