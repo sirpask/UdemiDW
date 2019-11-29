@@ -1,21 +1,106 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from './models/user';
+//importamos nuestro servicio de user.service.ts
+import { userService } from './services/user.service'
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   //styleUrls: ['./app.component.css'] NO SE USA
+  providers: [userService]
 })
-export class AppComponent {
+export class AppComponent  implements OnInit{
   public title = 'MUSIFY';
   public user: User;
   //local storage
-  public identity //= true;
+  public identity; //= true;
   public token;
+  public errorMessage;
 
-  constructor(){
+  constructor(private _userService:userService){
+
       this.user = new User('','','','','','ROLE_USER','');  // inicializamos el Usuario vacio
 
 
   }
+
+  //para llamar al servicio
+    ngOnInit(){
+    //esta prueba ya la podemos quitar de aqui
+            //var texto = this._userService.signup();
+            //console.log(texto);
+
+
+    }
+
+
+
+  public onSubmit() {
+      console.log(this.user);
+
+      //conseguimos los datos de usuario
+      this._userService.signup(this.user).subscribe(
+          response => {
+              console.log(response);
+              let identity = response.user;
+              this.identity = identity;
+
+              if(!this.identity._id){
+                  alert("El usuario no está correctamente identificado")
+              }else{
+                  //crear sesion en el local storaje para tener al usuario en sesion
+
+                  //conseguir el token para enviarselo a cada peticion Http
+                  this._userService.signup(this.user, 'true').subscribe(
+                      response => {
+                          let token = response.token;
+                          this.token = token;
+
+                          if(this.token.length <= 0){
+                              alert("EL token no se ha generado correctamente")
+                          }else{
+                              //crear sesion en el local storaje para tener al usuario en sesion para tener el token disponible
+
+
+
+                              console.log(token);
+                              console.log(identity);
+                          }
+
+
+
+                      },
+                      error => {
+                          var errorMessage = <any>error;
+                          if(errorMessage != null){
+                              //como parsear el error del json (el body)
+                              var body = JSON.parse(error._body);
+                              // hasta aqui
+                              this.errorMessage = body.message;
+                              console.log(error);
+                          }
+                      }
+                  );
+
+
+              }
+
+
+
+          },
+          error => {
+              var errorMessage = <any>error;
+              if(errorMessage != null){
+                  //como parsear el error del json (el body)
+                  var body = JSON.parse(error._body);
+                  // hasta aqui
+                  this.errorMessage = body.message;
+                  console.log(error);
+              }
+          }
+      );
+
+  }
+
+
 }
