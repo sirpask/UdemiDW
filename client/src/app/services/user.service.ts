@@ -14,7 +14,10 @@ import { GLOBAL } from './global';
 //crearemos un fichero global para la url, si no se pondria aqui
 @Injectable()
 export class userService{
+    public identity;
+    public token;
     public url: string;
+
 
     constructor(private _http: Http){
         this.url = GLOBAL.url;
@@ -33,5 +36,30 @@ export class userService{
         return this._http.post(this.url+'login', params, {headers: headers})
                         .map(res => res.json());
     }
+//crearemos un servicio para poder manipular los datos guardados en el localStorage
+
+    getIdentity(){
+        let identity = JSON.parse(localStorage.getItem('identity'));
+
+        if(identity != "undefined"){
+            this.identity = identity;
+        }else{
+            this.identity = null;
+        }
+        return this.identity;
+    }
+
+    getToken(){
+        let token = localStorage.getItem('token');
+
+        if(token != "undefined"){
+            this.token = token;
+        }else{
+            this.token = null;
+        }
+        return this.token;
+
+    }
+
 
 }

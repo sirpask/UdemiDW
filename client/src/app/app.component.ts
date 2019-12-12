@@ -29,6 +29,11 @@ export class AppComponent  implements OnInit{
     //esta prueba ya la podemos quitar de aqui
             //var texto = this._userService.signup();
             //console.log(texto);
+            this.identity = this._userService.getIdentity();
+            this.token = this._userService.getToken();
+
+            console.log(this.identity);
+            console.log(this.token);
 
 
     }
@@ -49,6 +54,9 @@ export class AppComponent  implements OnInit{
                   alert("El usuario no está correctamente identificado")
               }else{
                   //crear sesion en el local storaje para tener al usuario en sesion
+                  //para guardar la sesion, grabando en el localStorage
+                  localStorage.setItem('identity', JSON.stringify(identity));
+
 
                   //conseguir el token para enviarselo a cada peticion Http
                   this._userService.signup(this.user, 'true').subscribe(
@@ -60,7 +68,7 @@ export class AppComponent  implements OnInit{
                               alert("EL token no se ha generado correctamente")
                           }else{
                               //crear sesion en el local storaje para tener al usuario en sesion para tener el token disponible
-
+                              localStorage.setItem('token', token);
 
 
                               console.log(token);
@@ -100,6 +108,14 @@ export class AppComponent  implements OnInit{
           }
       );
 
+  }
+
+  logout(){
+      localStorage.removeItem('identity');
+      localStorage.removeItem('token');
+      localStorage.clear();
+      this.identity = null;
+      this.token = null;
   }
 
 
