@@ -12,6 +12,7 @@ import { userService } from './services/user.service'
 export class AppComponent  implements OnInit{
   public title = 'MUSIFY';
   public user: User;
+  public user_register: User;
   //local storage
   public identity; //= true;
   public token;
@@ -20,7 +21,7 @@ export class AppComponent  implements OnInit{
   constructor(private _userService:userService){
 
       this.user = new User('','','','','','ROLE_USER','');  // inicializamos el Usuario vacio
-
+      this.user_register = new User('','','','','','ROLE_USER','');  // las variables del usurio, las de la derecha
 
   }
 
@@ -116,6 +117,10 @@ export class AppComponent  implements OnInit{
       localStorage.clear();
       this.identity = null;
       this.token = null;
+  }
+
+  onSubmitRegister(){
+      console.log(this.user_register);
   }
 
 

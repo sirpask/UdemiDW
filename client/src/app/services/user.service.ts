@@ -36,7 +36,18 @@ export class userService{
         return this._http.post(this.url+'login', params, {headers: headers})
                         .map(res => res.json());
     }
-//crearemos un servicio para poder manipular los datos guardados en el localStorage
+//crearemos un servicio enviar los datos a la API
+
+//    register(user_to_register){
+//        let json = JSON.stringify(user_to_login);
+//        let params = json;
+
+//        let headers = new Headers({'Content-Type':'application/json'});
+
+//        return this._http.post(this.url+'login', params, {headers: headers})
+//                        .map(res => res.json());
+
+//    }
 
     getIdentity(){
         let identity = JSON.parse(localStorage.getItem('identity'));
