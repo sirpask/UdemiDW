@@ -57,6 +57,7 @@ export class AppComponent  implements OnInit{
                   //crear sesion en el local storaje para tener al usuario en sesion
                   //para guardar la sesion, grabando en el localStorage
                   localStorage.setItem('identity', JSON.stringify(identity));
+                  this.user = new User('','','','','','ROLE_USER','');  // inicializamos el Usuario vacio
 
 
                   //conseguir el token para enviarselo a cada peticion Http
