@@ -99,6 +99,7 @@ function loginUser(req, res){
     var email = params.email;
     var password = params.password;
 
+
     User.findOne({email: email.toLowerCase()}, (err, user) => {
         if(err) {
             res.status(500).send({message: 'Error en la peticion'});
@@ -107,6 +108,8 @@ function loginUser(req, res){
                 res.status(404).send({message: 'El usuario no existe'});
             }else{
                 //comprobar la contraseña
+                console.log(user.password);
+                console.log(password);
                 bcrypt.compare(password, user.password, function(err, check){
                     if(check){
                         //devolver los datos del usuario lofgeado

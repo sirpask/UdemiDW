@@ -25,16 +25,30 @@ export class userService{
 
     signup(user_to_login, gethash = null){
         //return 'Hola mundo desde el servicio';
+
         if (gethash != null){
             user_to_login.gethash = gethash;
         }
         let json = JSON.stringify(user_to_login);
         let params = json;
 
+
         let headers = new Headers({'Content-Type':'application/json'});
 
         return this._http.post(this.url+'login', params, {headers: headers})
                         .map(res => res.json());
+    }
+
+    register(user_to_register){
+    //    let json = JSON.stringify(user_to_register);
+    //    let params = json;   (SIMPLIFICANDO)
+        let params = JSON.stringify(user_to_register);
+
+        let headers = new Headers({'Content-Type':'application/json'});
+
+        return this._http.post(this.url+'register', params, {headers: headers})
+                        .map(res => res.json());
+
     }
 //crearemos un servicio enviar los datos a la API
 
