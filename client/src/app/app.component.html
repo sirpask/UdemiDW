@@ -2,17 +2,46 @@
     <h1>
         {{title}}
     </h1>
-    <span> {{identity.name}} {{identity.surname}}
-    </span>
-    <span class="btn btn-warning" (click)= "logout()">
-    Cerrar sesión
-    </span>
+    <nav id="navigation">
+        <a href="#">
+                <!--atributos de boostrap  -->
+                <fa-icon [icon]="faSearchPlus"></fa-icon>
+             Buscar
+        </a>
+        <a href="#">
+                <!--atributos de boostrap  -->
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+             Artistas
+        </a>
+        <a href="#">
+                <!--atributos de boostrap  -->
+                <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+             Albums
+        </a>
+
+    </nav>
+
+    <nav id="user_logged">
+
+        <span>
+            {{identity.name}}
+        </span>
+        <span class="btn btn-warning" (click)= "logout()">
+            Cerrar sesión
+        </span>
+        <a href="#">
+                <!--atributos de boostrap  -->
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+             Mis datos
+        </a>
+    </nav>
 
 </div>
 <div class="clearfix"></div>
 
 <div *ngIf="identity" class="central col-lg-11">
     <p>Estas logeado en la aplicación</p>
+    <user-edit></user-edit>
 </div>
 <!-- Directivas para modelos: [(ngModel)]="user.email", asignamos el valor -->
 <!-- Directivas de eventos: (ngSubmit)="onSubmit()", crearemos un evento onSubmit en app.componets-->

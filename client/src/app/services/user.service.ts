@@ -9,11 +9,10 @@ import { GLOBAL } from './global';
 
 
 
-
 //para poder injectar este decorador en cualquier otro logeado
 //crearemos un fichero global para la url, si no se pondria aqui
 @Injectable()
-export class userService{
+export class UserService{
     public identity;
     public token;
     public url: string;
@@ -62,6 +61,19 @@ export class userService{
 //                        .map(res => res.json());
 
 //    }
+
+update_user(user_to_update){
+    let params = JSON.stringify(user_to_update);
+
+    let headers = new Headers({
+        'Content-Type':'application/json',
+        'Authorization': this.getToken()
+    });
+
+    return this._http.put(this.url+'update-user/'+user_to_update._id, params, {headers: headers})
+                    .map(res => res.json());
+
+}
 
     getIdentity(){
         let identity = JSON.parse(localStorage.getItem('identity'));

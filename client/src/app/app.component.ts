@@ -1,13 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from './models/user';
 //importamos nuestro servicio de user.service.ts
-import { userService } from './services/user.service'
+import { UserService } from './services/user.service';
+import { faFilm,
+         faAdjust,
+         faSearchPlus,
+         faPlusCircle,
+         faArrowsAlt
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   //styleUrls: ['./app.component.css'] NO SE USA
-  providers: [userService]
+  providers: [UserService],
+  //selector: 'app-fontawesome',
+  //templateUrl: './fontawesome.component.html',
+  //styleUrls: ['./fontawesome.component.scss']
 })
 export class AppComponent  implements OnInit{
   public title = 'MUSIFY';
@@ -18,8 +27,13 @@ export class AppComponent  implements OnInit{
   public token;
   public errorMessage;
   public alertRegister;
+  faFilm = faFilm;
+  faAdjust = faAdjust;
+  faSearchPlus = faSearchPlus;
+  faPlusCircle = faPlusCircle;
+  faArrowsAlt = faArrowsAlt;
 
-  constructor(private _userService:userService){
+  constructor(private _userService:UserService){
 
       this.user = new User('','','','','','ROLE_USER','');  // inicializamos el Usuario vacio
       this.user_register = new User('','','','','','ROLE_USER','');  // las variables del usurio, las de la derecha
