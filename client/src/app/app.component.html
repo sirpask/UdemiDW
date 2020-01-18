@@ -29,7 +29,7 @@
         <span class="btn btn-warning" (click)= "logout()">
             Cerrar sesión
         </span>
-        <a href="#">
+        <a [routerLink]="['/mis-datos']">
                 <!--atributos de boostrap  -->
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
              Mis datos
@@ -41,7 +41,7 @@
 
 <div *ngIf="identity" class="central col-lg-11">
     <p>Estas logeado en la aplicación</p>
-    <user-edit></user-edit>
+    <router-outlet></router-outlet>
 </div>
 <!-- Directivas para modelos: [(ngModel)]="user.email", asignamos el valor -->
 <!-- Directivas de eventos: (ngSubmit)="onSubmit()", crearemos un evento onSubmit en app.componets-->

@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 //import { AppRoutingModule } from './app-routing.module';
+import { routing, appRoutingProviders } from './app.routing';
+
 import { AppComponent } from './app.component';
 import { UserEditComponent } from './components/user-edit.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -17,9 +19,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     //AppRoutingModule,
     FormsModule,
     HttpModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    routing
   ],
-  providers: [],    // cargamos servicios
+  providers: [appRoutingProviders],    // cargamos servicios
   bootstrap: [AppComponent]     //endpoint o punto principal de carga de la app
 })
 export class AppModule {
