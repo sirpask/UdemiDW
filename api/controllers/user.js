@@ -135,6 +135,11 @@ function loginUser(req, res){
 function updateUser(req, res) {
     var userId = req.params.id;
     var update = req.body;
+//req.user es del authenticated.js del payload que devuelve, para comprobar que solo modificamos nuestros datos
+//el return hace que se salga y no siga.
+    if(userId != req.user.sub){
+    return  res.status(500).send({message: 'no tienes permiso para actualizar este usuario'});
+    }
 
     User.findByIdAndUpdate(userId, update, (err, userUpdated) => {
         if(err){
