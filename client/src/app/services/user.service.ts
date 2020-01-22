@@ -69,7 +69,7 @@ updateUser(user_to_update){
         'Content-Type':'application/json',
         'Authorization': this.getToken()
     });
-
+    console.log('pask1'+this.getToken());
     return this._http.put(this.url+'update-user/'+user_to_update._id, params, {headers: headers})
                     .map(res => res.json());
 
@@ -88,7 +88,7 @@ updateUser(user_to_update){
 
     getToken(){
         let token = localStorage.getItem('token');
-
+        console.log('pask2'+token);
         if(token != "undefined"){
             this.token = token;
         }else{
