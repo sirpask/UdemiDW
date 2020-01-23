@@ -149,6 +149,8 @@ function updateUser(req, res) {
                 res.status(404).send({message: 'No se ha podido actualizar el usuario'});
             }else{
                 res.status(200).send({user: userUpdated});
+              //  console.log('usuario API: '+res.user.name);
+              //  console.log('usuario API2: '+res.text());
             }
         }
     });

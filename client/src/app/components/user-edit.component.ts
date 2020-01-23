@@ -38,12 +38,18 @@ export class UserEditComponent implements OnInit{
 
       this._userService.updateUser(this.user).subscribe(
         response => {
-          this.user = response.user;
+        //  this.user = response.user;  (la base de datos (API) devuelve los valores viejos)
           if(!response.user){
             this.alertMessage = "El usuario no se ha actualizado";
           }else{
-            this.user = response.user;
+          //  this.user = response.user;
             localStorage.setItem('identity', JSON.stringify(this.user));
+
+            //para cambiar el nombre del usuario en la cabecera de la pagina web,
+            //creamos en app.component.html   </span id="identity_name"> y le asignamos un nombre directamente
+            //con la propiedad document.getElementById
+            document.getElementById("identity_name").innerHTML = this.user.name
+
             this.alertMessage = "El usuario se ha actualizado correctamente";
           }
         },

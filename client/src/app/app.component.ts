@@ -64,7 +64,6 @@ export class AppComponent  implements OnInit{
               console.log(response);
               let identity = response.user;
               this.identity = identity;
-              console.log('pask3'+identity);
 
               if(!this.identity._id){
                   alert("El usuario no está correctamente identificado")
@@ -74,23 +73,18 @@ export class AppComponent  implements OnInit{
                   localStorage.setItem('identity', JSON.stringify(identity));
                 //  this.user = new User('','','','','','ROLE_USER','');  // inicializamos el Usuario vacio
 
-                  console.log('pask6'+identity._id);
-                  console.log('pask9'+this.user);
+
                   //conseguir el token para enviarselo a cada peticion Http
                   this._userService.signup(this.user, 'true').subscribe(
                       response => {
                           let token = response.token;
                           this.token = token;
-                          console.log('pask7'+token);
                           if(this.token.length <= 0){
                               alert("EL token no se ha generado correctamente")
                           }else{
                               //crear sesion en el local storaje para tener al usuario en sesion para tener el token disponible
                               localStorage.setItem('token', token);
 
-
-                              console.log('pask4'+token);
-                              console.log('pask5'+identity);
                           }
 
 
