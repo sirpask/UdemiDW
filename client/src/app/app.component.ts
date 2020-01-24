@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from './models/user';
+import { GLOBAL } from './services/global';
 //importamos nuestro servicio de user.service.ts
 import { UserService } from './services/user.service';
 import { faFilm,
@@ -32,12 +33,13 @@ export class AppComponent  implements OnInit{
   faSearchPlus = faSearchPlus;
   faPlusCircle = faPlusCircle;
   faArrowsAlt = faArrowsAlt;
+  public url:string;
 
   constructor(private _userService:UserService){
 
       this.user = new User('','','','','','ROLE_USER','');  // inicializamos el Usuario vacio
       this.user_register = new User('','','','','','ROLE_USER','');  // las variables del usurio, las de la derecha
-
+      this.url = GLOBAL.url;
   }
 
   //para llamar al servicio
