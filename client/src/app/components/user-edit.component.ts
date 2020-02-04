@@ -62,7 +62,9 @@ export class UserEditComponent implements OnInit{
                    this.user.image = result.image;
                    localStorage.setItem('identity', JSON.stringify(this.user));
 
-                   console.log(this.user);
+                  //para mostrar el avatar pequeño en el menu o columna 
+                   let image_path = this.url+'get-image-user/'+this.user.image;
+                   document.getElementById('image-logged').setAttribute('src', image_path);
 
                 }
               );

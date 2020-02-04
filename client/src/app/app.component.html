@@ -1,17 +1,23 @@
 <div *ngIf="identity"   class="navigation col-lg-1">
-    <h1>
+    <h1 class="head-title">
+        <a [routerLink]= "['/']">
+            <span class="glyphicon glyphicon-music" aria-hidden="true"></span>
         {{title}}
+        </a>
     </h1>
     <nav id="navigation">
         <a href="#">
                 <!--atributos de boostrap  -->
-                <fa-icon [icon]="faSearchPlus"></fa-icon>
+              <!--  <fa-icon [icon]="faSearchPlus"></fa-icon>  -->
+              <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
              Buscar
+        <br>
         </a>
         <a href="#">
                 <!--atributos de boostrap  -->
                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
              Artistas
+        <br>
         </a>
         <a href="#">
                 <!--atributos de boostrap  -->
@@ -23,33 +29,36 @@
 
     <nav id="user_logged">
       <div class="user-image">
-            <img src="{{url + 'get-image-user/' + identity.image}}" style = "width: 50px;"/>
+            <img id="image-logged" src="{{url + 'get-image-user/' + identity.image}}"/>
 
         </div>
         <span id="identity_name">
             {{identity.name}}
         </span>
-        <span class="btn btn-warning" (click)= "logout()">
-            Cerrar sesión
-        </span>
+
+
         <a [routerLink]="['/mis-datos']">
                 <!--atributos de boostrap  -->
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
              Mis datos
         </a>
+        <a (click)= "logout()" class="btn-logout">
+                <!--atributos de boostrap  -->
+                <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+             salir
+        </a>
     </nav>
 
 </div>
-<div class="clearfix"></div>
+
 
 <div *ngIf="identity" class="central col-lg-11">
-    <p>Estas logeado en la aplicación</p>
     <router-outlet></router-outlet>
 </div>
 <!-- Directivas para modelos: [(ngModel)]="user.email", asignamos el valor -->
 <!-- Directivas de eventos: (ngSubmit)="onSubmit()", crearemos un evento onSubmit en app.componets-->
 
-<div class="col-lg-12"  *ngIf="!identity" class="row col-lg-12">
+<div class="col-lg-11"  *ngIf="!identity" >
     <div class="col-lg-6">
         <h1>Identificate</h1>
         <div *ngIf="errorMessage">
