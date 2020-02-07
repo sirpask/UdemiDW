@@ -7,12 +7,16 @@ import { routing, appRoutingProviders } from './app.routing';
 
 import { AppComponent } from './app.component';
 import { UserEditComponent } from './components/user-edit.component';
+import { HomeComponent } from './components/home.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ArtistListComponent } from './components/artist-list.component';
 
 @NgModule({
   declarations: [               //cargamos componentes y directivas
     AppComponent,
-    UserEditComponent
+    UserEditComponent,
+    ArtistListComponent,
+    HomeComponent
   ],
   imports: [                        //cargamos modulos del framework y modulos nuestros
     BrowserModule,

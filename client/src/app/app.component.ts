@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from './models/user';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { GLOBAL } from './services/global';
 //importamos nuestro servicio de user.service.ts
 import { UserService } from './services/user.service';
@@ -35,7 +36,11 @@ export class AppComponent  implements OnInit{
   faArrowsAlt = faArrowsAlt;
   public url:string;
 
-  constructor(private _userService:UserService){
+  constructor(
+    private _userService:UserService,
+    private _route: ActivatedRoute,
+    private _router: Router
+  ){
 
       this.user = new User('','','','','','ROLE_USER','');  // inicializamos el Usuario vacio
       this.user_register = new User('','','','','','ROLE_USER','');  // las variables del usurio, las de la derecha
@@ -132,6 +137,7 @@ export class AppComponent  implements OnInit{
       this.user = new User('','','','','','ROLE_USER','');  // inicializamos el Usuario vacio
       this.identity = null;
       this.token = null;
+      this._router.navigate(['/']);
   }
 
 
